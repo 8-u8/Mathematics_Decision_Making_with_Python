@@ -1,0 +1,3 @@
+*.csv
+Pipfile.lock
+*/__pychache__/
