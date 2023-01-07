@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+scipy = "*"
+numpy = "*"
+pandas = "*"
+nashpy = "*"
+pulp = "*"
+sklearn = "*"
+axelrod = "*"
+networkx = "*"
+autopep8 = "*"
+flake8 = "*"
+ipython = "*"
+jupyter = "*"
+sympy = "*"
+aco-pants = "*"
+criticalpath = "*"
+deap = "*"
+graphviz = "*"
+japanize-matplotlib = "*"
+lxml = "*"
+seaborn = "*"
+matplotlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
