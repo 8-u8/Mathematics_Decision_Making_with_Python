@@ -1,0 +1,2 @@
+# Mathematics_Decision_Making_with_Python
+Python意思決定の数理入門を頑張る
