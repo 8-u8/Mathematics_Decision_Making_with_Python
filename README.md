@@ -7,7 +7,7 @@ Python意思決定の数理入門を頑張る
 ## 案内
 
 - 1章 概論のみなのでPass。
-- [2章 戦略の微分方程式モデル](https://8-u8.github.io/Mathematics_Decision_Making_with_Python/chp2.html)
+- [2章 戦略の微分方程式モデル](https://8-u8.github.io/Mathematics_Decision_Making_with_Python/chp02.html)
 - 3章 基礎的な意思決定の数理的取り扱い
 - 4章 ゲーム理論の基礎
 - 5章 意思決定のためのORの基礎
