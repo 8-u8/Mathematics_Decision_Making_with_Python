@@ -94,7 +94,7 @@ tcl_4, ycl_4 = Lanchestar_func(tend=0.6, cx=3.0, cy=1.0, law=2)
 
 
 # %% vizualize
-fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(6, 4))
+fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(8, 6))
 
 ax[0, 0].set_title("Lanchestar 1st law: cx=1.0, cy=1.0")
 ax[0, 0].plot(tcl_1, ycl_1[0].T)
