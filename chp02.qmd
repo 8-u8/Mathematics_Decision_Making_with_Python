@@ -92,6 +92,12 @@ tcl_2, ycl_2 = Lanchestar_func(cx=3.0, cy=1.0, law=1, tend=2.5)
 tcl_3, ycl_3 = Lanchestar_func(tend=0.8, cx=1.0, cy=1.0, law=2)
 tcl_4, ycl_4 = Lanchestar_func(tend=0.6, cx=3.0, cy=1.0, law=2)
 
+```
+
+可視化する。オレンジはY軍、青がX軍。
+
+```{python}
+
 
 # %% vizualize
 fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(8, 6))
