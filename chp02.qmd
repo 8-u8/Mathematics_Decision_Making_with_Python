@@ -1,0 +1,114 @@
+[Topへ戻る](https://8-u8.github.io/Mathematics_Decision_Making_with_Python/)
+
+# 2章 戦略の微分方程式モデル
+
+## 2.1 ランチェスターの法則
+
+### 2.1.1. はじめに
+第一次世界大戦中の1916年、F. W. Lanchesterは、対立する戦力の変化を、時間に対する一階の微分方程式モデルで表現した。ランチェスターの法則として知られ、実際の戦闘例によっても検証されていて、有効性が実証されている。  
+ビジネスにおいては、大手企業におけるセールス戦略の立案に貢献している。
+
+また、関連して現代におけるOperation Researchの先駆けとも考えられるので、経営学やORの研究で「ランチェスター賞」が開かれている。  
+
+ランチェスターの法則は「多勢に無勢」とか「寡をもって衆を制す」につながる。
+
+導出には[矢田部](https://www.mesw.co.jp/business/report/pdf/mss_19_07.pdf)が読める。  
+[佐藤](https://www.amazon.co.jp/%E8%87%AA%E7%84%B6%E3%81%AE%E6%95%B0%E7%90%86%E3%81%A8%E7%A4%BE%E4%BC%9A%E3%81%AE%E6%95%B0%E7%90%86-1%E2%80%95%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%BC%8F%E3%81%A7%E8%A7%A3%E6%9E%90%E3%81%99%E3%82%8B-%E4%BD%90%E8%97%A4-%E7%B8%BD%E5%A4%AB/dp/4535603014)は書籍だが古いかもしれない。  
+[Ogiwara and Usami](https://libir.josai.ac.jp/il/user_contents/02/G0000284repository/pdf/JOS-13447777-1105.pdf)はPDFで読めたので、導出にはこれらを読むのが良さそう。
+
+
+### 2.1.2 ランチェスターの第一法則
+todo: 数式だけでなく、解の導出までやる
+
+### 2.1.3 ランチェスターの第二法則
+todo: 数式だけでなく、解の導出までやる
+
+### 2.1.4 シミュレーション例
+大本のコードを確認しながら実行してみる。  
+基本は[ここ](https://github.com/8-u8/Mathematics_Decision_Making_with_Python/blob/main/src/chp02_Lanchestar.py)のコードコピペ。
+
+```{python}
+# %%
+from scipy.integrate import solve_ivp
+import numpy as np
+import matplotlib.pyplot as plt
+
+# %% function
+
+
+def ode_Lan1(t, z, cx, cy):
+    dx = -cy  # Y軍の武器の性能
+    dy = -cx  # X軍の武器の性能
+
+    return [dx, dy]
+
+
+def ode_Lan2(t, z, cx, cy):
+    dx = -cy * z[1]
+    dy = -cx * z[0]
+
+    return [dx, dy]
+
+
+def Lanchestar_func(x0=5.0, y0=7.0, cx=1.0, cy=1.0, tend=5.0, law=1):
+    if law == 1:
+        sol = solve_ivp(
+            ode_Lan1,
+            t_span=[0, tend],  # 積分範囲。
+            y0=[x0, y0],  # 初期値。
+            args=(cx, cy,),  # solve_ivpにわたすパラメータ。
+            dense_output=True  # なめらかな数値解を渡すための奴(深く考えるな)
+            )
+
+        tcl = np.linspace(0, tend, 100)
+        ycl = sol.sol(tcl)
+
+        return tcl, ycl
+    elif law == 2:
+        sol = solve_ivp(
+            ode_Lan2,
+            t_span=[0, tend],  # 積分範囲。
+            y0=[x0, y0],  # 初期値。
+            args=(cx, cy,),  # solve_ivpにわたすパラメータ。
+            dense_output=True  # なめらかな数値解を渡すための奴(深く考えるな)
+            )
+
+        tcl = np.linspace(0, tend, 100)
+        ycl = sol.sol(tcl)
+
+        return tcl, ycl
+
+
+# %% calc
+# 1st law
+tcl_1, ycl_1 = Lanchestar_func(cx=1.0, cy=1.0, law=1, tend=5.0)
+tcl_2, ycl_2 = Lanchestar_func(cx=3.0, cy=1.0, law=1, tend=2.5)
+
+# 2nd law
+tcl_3, ycl_3 = Lanchestar_func(tend=0.8, cx=1.0, cy=1.0, law=2)
+tcl_4, ycl_4 = Lanchestar_func(tend=0.6, cx=3.0, cy=1.0, law=2)
+
+
+# %% vizualize
+fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(6, 4))
+
+ax[0, 0].set_title("Lanchestar 1st law: cx=1.0, cy=1.0")
+ax[0, 0].plot(tcl_1, ycl_1[0].T)
+ax[0, 0].plot(tcl_1, ycl_1[1].T)
+
+ax[0, 1].set_title("Lanchestar 1st law: cx=3.0, cy=1.0")
+ax[0, 1].plot(tcl_2, ycl_2[0].T)
+ax[0, 1].plot(tcl_2, ycl_2[1].T)
+
+ax[1, 0].set_title("Lanchestar 2nd law: cx=1.0, cy=1.0")
+ax[1, 0].plot(tcl_3, ycl_3[0])
+ax[1, 0].plot(tcl_3, ycl_3[1])
+
+ax[1, 1].set_title("Lanchestar 2nd law: cx=3.0, cy=1.0")
+ax[1, 1].plot(tcl_4, ycl_4[0])
+ax[1, 1].plot(tcl_4, ycl_4[1])
+
+plt.show()
+```
+
+### リチャードソンの軍拡競争モデル

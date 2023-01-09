@@ -1,9 +1,7 @@
 # %%
 from scipy.integrate import solve_ivp
 import numpy as np
-# import seaborn
 import matplotlib.pyplot as plt
-# import japanize-matplotlib
 
 # %%
 
