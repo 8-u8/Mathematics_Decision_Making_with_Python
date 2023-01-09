@@ -25,7 +25,9 @@ todo: 数式だけでなく、解の導出までやる
 
 ### 2.1.4 シミュレーション例
 大本のコードを確認しながら実行してみる。  
-基本は[ここ](https://github.com/8-u8/Mathematics_Decision_Making_with_Python/blob/main/src/chp02_Lanchestar.py)のコードコピペ。
+基本は[ここ](https://github.com/8-u8/Mathematics_Decision_Making_with_Python/blob/main/src/chp02_Lanchestar.py)のコードコピペ。  
+
+メモ:特に`scipy`の挙動がよくわからない。
 
 ```{python}
 # %%
