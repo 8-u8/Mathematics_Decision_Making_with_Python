@@ -19,11 +19,157 @@
 
 ### 2.1.2 ランチェスターの第一法則
 
-todo: 数式だけでなく、解の導出までやる
+ランチェスターの第一法則は「一騎打ちの法則」友いわれる。  
+敵と味方が1人ずつ戦うので、チームワークや将軍の采配などがない。  
+つまり、集団の戦略的行動がない事を考える。  
+
+$x$と$y$はそれぞれX軍、Y軍の戦力数(人)で、$c_x$と$c_y$はX軍とY軍の持つ  
+武器の性能であると考える(兵器は対象外)。  
+武器の性能は「一人あたりが倒せる敵の人数の平均」を入れる。  
+つまり武器の性能の単位も「人」
+
+方程式は以下。
+
+\begin{equation}
+\left\{\, 
+    \begin{aligned}
+        \frac{dx}{dt} = -c_y \\
+        \frac{dy}{dt} = -c_x
+    \end{aligned}
+\right .
+\end{equation}
+
+ただし、$c_x, c_y > 0$、$x, y > 0$、$t \geq 0$である。
+
+方程式の解釈をすると、Y軍の武器の性能が大きいほど、X軍の戦力数は時間に応じて大幅に減っていく。
+
+
+【解】  
+初期条件が $x(0) = x_0$、 $y(0) = y_0$ として与えられるとき、  
+ランチェスターの第一法則の解は以下で与えられる。
+
+\begin{equation}
+\begin{aligned}
+x(t) = x_0 + c_yt \\
+y(t) = y_0 + c_xt
+\end{aligned}
+\end{equation}
+
+【証明】
+それぞれを$t$について積分する。  
+
+\begin{equation}
+\begin{aligned}
+x(t) = \int-c_y dt = -c_yt + C \\
+x(0) = C = x_0だから \\
+x(t) = -c_yt + x_0
+\end{aligned}
+\end{equation}
+
+2つ目の方程式についても同様である。
 
 ### 2.1.3 ランチェスターの第二法則
 
-todo: 数式だけでなく、解の導出までやる
+第二法則は「集中効果の法則」として知られる。  
+第一法則と異なり、集団とする部隊を単位に行動し、複数の的を同時に攻撃可能。  
+主要戦力を戦場の一点に集中させて戦況を有利に仕様という「集中効果」を狙うことを想定する。
+
+方程式は以下。
+
+
+\begin{equation}
+\left　\{\,
+    \begin{aligned}
+        \frac{dx}{dt} = -c_y y \\
+        \frac{dy}{dt} = -c_x x
+    \end{aligned}
+
+\right.
+\end{equation}
+
+第一法則と比べると、X軍の戦力数の減り方は、Y軍の武器の性能×戦力数に比例する。  
+つまり、Y軍の武器の性能が大きいか、Y軍の戦力数が多いと、この減少幅は大きくなる。  
+逆に、Y軍の戦力数が多いことは、X軍からの攻撃による損耗が僅かであるということになる。  
+
+【解】初期条件は2.1.2と同様のとき
+
+\begin{equation}
+\begin{aligned}
+x(t) = \frac{1}{2}\{(x_0 + \sqrt{R}y_0)\exp{(-\sqrt{c_xc_y}t)} + 
+                    (x_0 - \sqrt{R}y_0)\exp{(-\sqrt{c_xc_y}t)}\} \\
+y(t) = \frac{1}{2\sqrt{R}}\{(x_0 + \sqrt{R}y_0)\exp{(-\sqrt{c_xc_y}t)} + 
+                    (x_0 - \sqrt{R}y_0)\exp{(-\sqrt{c_xc_y}t)}\}\\
+\\
+
+\end{aligned}
+\end{equation}
+
+ただし、 $R = \frac{c_y}{c_x}$である。
+
+【証明】
+以下は[矢田部](https://www.mesw.co.jp/business/report/pdf/mss_19_07.pdf)を参照する。
+第1式を$t$で微分して、第2式を代入する。
+
+\begin{equation}
+\begin{aligned}
+
+    &\frac{d^2x}{dt^2} = -c_y\frac{dy}{dt} \\
+    &\Rightarrow \frac{d^2x}{dt^2} = -c_y(-c_xx)\\
+    &\Rightarrow \frac{d^2x}{dt^2} = c_xc_yx
+
+\end{aligned}
+\end{equation}
+
+どういうわけかわからないが、この方程式の一般解は以下で与えられる。  
+ただし、$A,B$は定数(後でちゃんと解く)
+
+$$
+x = A\exp{(\sqrt{c_xc_y}t)} + B\exp{(\sqrt{c_xc_y}t)}　(A1)
+$$
+
+初期条件について、$x(0) = A + B = x_0$ (A2)
+
+第1式に代入して
+
+$$
+A\sqrt{c_xc_y}\exp{(\sqrt{c_xc_y}t)} + B\sqrt{c_xc_y}\exp{(\sqrt{c_xc_y}t)} = -c_yy
+$$
+
+初期条件を代入して
+
+$$
+A-B = -\sqrt{c_xc_y}y_0
+$$
+
+であり(A3)、これらを$A、B$について解くと
+
+\begin{equation}
+\begin{aligned}
+&A = \frac{1}{2}(x_0 - \sqrt{\frac{c_y}{c_x}}y_0) \\
+&B = \frac{1}{2}(x_0 + \sqrt{\frac{c_y}{c_x}}y_0)
+\end{aligned}
+\end{equation}
+
+(A1)に代入すると、解の1つ目が得られる。  
+第2式を$t$で積分すると、$C$を定数として
+
+$$
+y=\int-c_x x + C
+$$
+
+である。第1式を代入し、初期条件を考えると$C=0$であり、解の2つ目が得られる(らしい)。
+
+### 【補足】戦場以外でランチェスターの法則を使う場合
+
+マーケティングにおける自社ブランドのポジショニング戦略に応用されるらしい。  
+
+- たとえば[ここ](https://www.kcsf.co.jp/marketing/lanchester.html)とか
+[ここ](https://infinity-agent.co.jp/lab/lanchester-strategy/)などに書かれている。
+  - 前者では「接近戦」と「長距離戦」という、武器の特性を使った戦い方、  
+    後者では「局地戦」「一点集中」など、より戦術寄りの解釈をしているようにみえる。
+
+ただ、
+
 
 ### 2.1.4 シミュレーション例
 大本のコードを確認しながら実行してみる。  
@@ -122,6 +268,8 @@ plt.show()
 ```
 
 ### 2.1.5 おわりに
+
+[補足]()
 
 ### 【省略】付録
 
